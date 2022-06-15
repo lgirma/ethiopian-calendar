@@ -1,6 +1,6 @@
 # ethiopian-calendar
 
-Ethiopian calendar library for Go
+Ethiopian calendar and feasts library for Go
 
 ## Installation
 
@@ -28,7 +28,7 @@ To convert a date in Gregorian calendar to Ethiopian calendar, use `ToEthiopian(
 ethcal.ToEthiopian(ethcal.NewDate(2022, 01, 01))
 ```
 
-## Moving Feasts
+### Moving Feasts
 
 The Easter and related feasts in the Ethiopian Orthodox Tewahedo Church are not pinned to specific dates.
 
@@ -54,4 +54,18 @@ FEAST_RIKBE_KAHINAT = 93
 FEAST_ERGET = 108               // Or can use FEAST_ASCENSION
 FEAST_PERAQLITOS = 118          // Or can use FEAST_PENTECOST
 FEAST_TSOME_HAWARIAT = 119      // Or can use FEAST_APOSTLES_FAST
+```
+
+### i18n Utilities
+
+Utilities to convert date and month values to Amharic/Geez strings are also available.
+
+```go
+// Using 0-based indexing
+
+ethcal.MONTH_NAMES[0]   // Returns "መስከረም"
+
+ethcal.DAY_NAMES[2] // Returns "ረቡዕ"
+
+ethcal.EVANGELISTS_NAMES[1] // Returns "ማርቆስ"
 ```
