@@ -4,28 +4,28 @@ import (
 	"math"
 )
 
-// GREG_MONTHS_STARTING_SEPT Number of days in gregorian months
+// GregMonthsStartingSept Number of days in gregorian months
 // starting with September (index 1)
 // Index 0 is reserved for leap years switches.
 // Index 4 is December, the final month of the year.
-var GREG_MONTHS_STARTING_SEPT = []int{0, 30, 31, 30, 31, 31, 28, 31, 30, 31, 30, 31, 31, 30}
+var GregMonthsStartingSept = []int{0, 30, 31, 30, 31, 31, 28, 31, 30, 31, 30, 31, 31, 30}
 
-// GREG_ORDER Gregorian months ordered according to Ethiopian
-var GREG_ORDER = []int{8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+// GregOrder Gregorian months ordered according to Ethiopian
+var GregOrder = []int{8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-// GREG_MONTHS_STARTING_JAN Number of days in gregorian months
+// GregMonthsStartingJan Number of days in gregorian months
 // starting with January (index 1)
 // Index 0 is reserved for leap years switches.
-var GREG_MONTHS_STARTING_JAN = []int{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+var GregMonthsStartingJan = []int{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
 
-// ETH_MONTHS Number of days in ethiopian months
+// EthMonths Number of days in ethiopian months
 // starting with January (index 1)
 // Index 0 is reserved for leap years switches.
 // Index 10 is month 13, the final month of the year
-var ETH_MONTHS = []int{0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 5, 30, 30, 30, 30}
+var EthMonths = []int{0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 5, 30, 30, 30, 30}
 
-// ETH_ORDER Ethiopian months ordered according to Gregorian
-var ETH_ORDER = []int{0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4}
+// EthOrder Ethiopian months ordered according to Gregorian
+var EthOrder = []int{0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4}
 
 
 
@@ -38,8 +38,8 @@ func startDayOfEc(year int) int {
 }
 
 func ToGregorian(ecDate Date) Date {
-	gregorianMonths := make([]int, len(GREG_MONTHS_STARTING_SEPT))
-	copy(gregorianMonths, GREG_MONTHS_STARTING_SEPT)
+	gregorianMonths := make([]int, len(GregMonthsStartingSept))
+	copy(gregorianMonths, GregMonthsStartingSept)
 
 	newYearDay := startDayOfEc(ecDate.Year)
 	gregorianYear := ecDate.Year + 7
@@ -84,7 +84,7 @@ func ToGregorian(ecDate Date) Date {
 
 	return Date{
 		Day:   gregorianDate,
-		Month: GREG_ORDER[m],
+		Month: GregOrder[m],
 		Year:  gregorianYear,
 	}
 }
@@ -95,10 +95,10 @@ func ToEthiopian(gcDate Date) Date {
 		return Date{}
 	}
 
-	gregorianMonths := make([]int, len(GREG_MONTHS_STARTING_JAN))
-	copy(gregorianMonths, GREG_MONTHS_STARTING_JAN)
-	ethMonths := make([]int, len(ETH_MONTHS))
-	copy(ethMonths, ETH_MONTHS)
+	gregorianMonths := make([]int, len(GregMonthsStartingJan))
+	copy(gregorianMonths, GregMonthsStartingJan)
+	ethMonths := make([]int, len(EthMonths))
+	copy(ethMonths, EthMonths)
 
 	if (gcDate.Year %4 == 0 && gcDate.Year % 100 != 0) || gcDate.Year % 400 == 0 {
 		gregorianMonths[6] = 29
@@ -161,7 +161,7 @@ func ToEthiopian(gcDate Date) Date {
 
 	return Date{
 		Day:   ethDate,
-		Month: ETH_ORDER[m],
+		Month: EthOrder[m],
 		Year:  ethYear,
 	}
 }
