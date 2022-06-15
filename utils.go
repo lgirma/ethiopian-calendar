@@ -18,6 +18,7 @@ func GetRabit(year int) int {
 
 func GetWenber(year int) int {
 	aa := 5500 + year
+	// TODO: What happens when (aa % 19 == 0)?
 	return (aa % 19) - 1
 }
 
@@ -45,9 +46,9 @@ func GetMebajaHamer(year int) DayOfYear {
 	}
 	tewsakTable := []int{0, 6, 5, 4, 3, 2, 8, 7}
 	meTqAndDayTewsak := meTq + tewsakTable[meTqDay]
-	month := 0
+	month := meTqMonth
 	if meTqAndDayTewsak > 30 {
-		month = 1
+		month += 1
 	}
 	return DayOfYear{
 		Month: month,

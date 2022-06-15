@@ -4,10 +4,7 @@ import "math"
 
 func GetNineveh(year int) DayOfYear {
 	mebajaHamer := GetMebajaHamer(year)
-	return DayOfYear{
-		Day:   mebajaHamer.Month + 4,
-		Month: mebajaHamer.Day,
-	}
+	return NewDay(mebajaHamer.Month + 4, mebajaHamer.Day)
 }
 
 func GetFeastFromNineveh(feast int, nineveh DayOfYear) DayOfYear {

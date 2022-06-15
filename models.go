@@ -5,11 +5,15 @@ type DayOfYear struct {
 	Month int
 }
 
-func NewDayOfYear(month int, day int) DayOfYear {
+func NewDay(month int, day int) DayOfYear {
 	return DayOfYear{Month: month, Day: day}
 }
 
-type ECDate struct {
+func NewDate(year int, month int, day int) Date {
+	return Date{Year: year, Month: month, Day: day}
+}
+
+type Date struct {
 	Day int
 	Month int
 	Year int
