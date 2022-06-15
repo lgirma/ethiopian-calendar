@@ -10,9 +10,9 @@ func TestGetNineveh(t *testing.T) {
 }
 
 func TestGetFeastFromNineveh(t *testing.T) {
-	//runTestForYear(t, 2014)
-	//runTestForYear(t, 2015)
-	//runTestForYear(t, 2022)
+	runTestForYear(t, 2014)
+	runTestForYear(t, 2015)
+	runTestForYear(t, 2022)
 	runTestForYear(t, 2024)
 }
 

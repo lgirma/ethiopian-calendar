@@ -7,6 +7,8 @@ func GetNineveh(year int) DayOfYear {
 	return NewDay(mebajaHamer.Month + 4, mebajaHamer.Day)
 }
 
+var GetNenewe = GetNineveh
+
 func GetFeastFromNineveh(feast int, nineveh DayOfYear) DayOfYear {
 	day := nineveh.Day + feast
 	result := DayOfYear{

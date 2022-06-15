@@ -35,6 +35,9 @@ The Easter and related feasts in the Ethiopian Orthodox Tewahedo Church are not 
 To get on which day of year a feast will be at:
 
 ```go
+// Get date of start of the 'Tsome Nenewe' (fast of Nineveh) for the year 2014 in Ethiopian Calendar
+ethcal.GetNineveh(2014)  // Same as GetNenewe()
+
 // Get date of start of the Great lent for the year 2014 in Ethiopian Calendar
 ethcal.GetFeast(ethcal.FEAST_ABIY_TSOM, 2014)
 
@@ -69,3 +72,7 @@ ethcal.DAY_NAMES[2] // Returns "ረቡዕ"
 
 ethcal.EVANGELISTS_NAMES[1] // Returns "ማርቆስ"
 ```
+
+## License
+
+ISC License
