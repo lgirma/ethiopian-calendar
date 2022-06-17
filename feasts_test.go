@@ -37,8 +37,8 @@ var preComputedTableFrom2014 = [][]DayOfYear {
 	{},
 	{
 		NewDay(6, 15), NewDay(6, 29), NewDay(7, 26), NewDay(8, 17),
-		NewDay(8, 22), NewDay(8, 24), NewDay(10, 13), NewDay(10, 14),
-		NewDay(10, 10),
+		NewDay(8, 22), NewDay(8, 24), NewDay(10, 3), NewDay(10, 13),
+		NewDay(10, 14),
 	},
 }
 
@@ -46,11 +46,12 @@ func runTestForYear(t *testing.T, year int) {
 	nv := GetNineveh(year)
 	i := year - 2014
 	assert.Equal(t, preComputedTableFrom2014[i][0], nv)
-	assert.Equal(t, preComputedTableFrom2014[i][1], GetFeastFromNineveh(FEAST_ABIY_TSOM, nv))
-	assert.Equal(t, preComputedTableFrom2014[i][2], GetFeastFromNineveh(FEAST_DEBREZEIT, nv))
-	assert.Equal(t, preComputedTableFrom2014[i][3], GetFeastFromNineveh(FEAST_HOSAENA, nv))
-	assert.Equal(t, preComputedTableFrom2014[i][4], GetFeastFromNineveh(FEAST_SIQLET, nv))
-	assert.Equal(t, preComputedTableFrom2014[i][5], GetFeastFromNineveh(FEAST_TINSAE, nv))
-	assert.Equal(t, preComputedTableFrom2014[i][6], GetFeastFromNineveh(FEAST_ERGET, nv))
-	assert.Equal(t, preComputedTableFrom2014[i][7], GetFeastFromNineveh(FEAST_PERAQLITOS, nv))
+	assert.Equal(t, preComputedTableFrom2014[i][1], GetFeastFromNineveh(FEAST_ABIY_TSOM, nv), "Wrong Abiy Tsom calculation")
+	assert.Equal(t, preComputedTableFrom2014[i][2], GetFeastFromNineveh(FEAST_DEBREZEIT, nv), "Wrong Debrezeit calculation")
+	assert.Equal(t, preComputedTableFrom2014[i][3], GetFeastFromNineveh(FEAST_HOSAENA, nv), "Wrong Hasaena calculation")
+	assert.Equal(t, preComputedTableFrom2014[i][4], GetFeastFromNineveh(FEAST_SIQLET, nv), "Wrong Siqlet calculation")
+	assert.Equal(t, preComputedTableFrom2014[i][5], GetFeastFromNineveh(FEAST_TINSAE, nv), "Wrong Tinsae calculation")
+	assert.Equal(t, preComputedTableFrom2014[i][6], GetFeastFromNineveh(FEAST_ERGET, nv), "Wrong Erget calculation")
+	assert.Equal(t, preComputedTableFrom2014[i][7], GetFeastFromNineveh(FEAST_PERAQLITOS, nv), "Wrong PeraqliTos calculation")
+	assert.Equal(t, preComputedTableFrom2014[i][8], GetFeastFromNineveh(FEAST_TSOME_HAWARIAT, nv), "Wrong Tsome Hawariat calculation")
 }

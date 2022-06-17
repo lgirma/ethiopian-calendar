@@ -4,29 +4,28 @@ import (
 	"math"
 )
 
-// GregMonthsStartingSept Number of days in gregorian months
+// gregMonthsStartingSept Number of days in gregorian months
 // starting with September (index 1)
 // Index 0 is reserved for leap years switches.
 // Index 4 is December, the final month of the year.
-var GregMonthsStartingSept = []int{0, 30, 31, 30, 31, 31, 28, 31, 30, 31, 30, 31, 31, 30}
+var gregMonthsStartingSept = []int{0, 30, 31, 30, 31, 31, 28, 31, 30, 31, 30, 31, 31, 30}
 
-// GregOrder Gregorian months ordered according to Ethiopian
-var GregOrder = []int{8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+// gregOrder Gregorian months ordered according to Ethiopian
+var gregOrder = []int{8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-// GregMonthsStartingJan Number of days in gregorian months
+// gregMonthsStartingJan Number of days in gregorian months
 // starting with January (index 1)
 // Index 0 is reserved for leap years switches.
-var GregMonthsStartingJan = []int{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+var gregMonthsStartingJan = []int{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
 
-// EthMonths Number of days in ethiopian months
+// ethMonths Number of days in ethiopian months
 // starting with January (index 1)
 // Index 0 is reserved for leap years switches.
 // Index 10 is month 13, the final month of the year
-var EthMonths = []int{0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 5, 30, 30, 30, 30}
+var ethMonths = []int{0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 5, 30, 30, 30, 30}
 
-// EthOrder Ethiopian months ordered according to Gregorian
-var EthOrder = []int{0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4}
-
+// ethOrder Ethiopian months ordered according to Gregorian
+var ethOrder = []int{0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4}
 
 
 func startDayOfEc(year int) int {
@@ -37,9 +36,10 @@ func startDayOfEc(year int) int {
 	return int(newYearDay)
 }
 
+// ToGregorian Converts given date in Ethiopian calendar to Gregorian calendar
 func ToGregorian(ecDate Date) Date {
-	gregorianMonths := make([]int, len(GregMonthsStartingSept))
-	copy(gregorianMonths, GregMonthsStartingSept)
+	gregorianMonths := make([]int, len(gregMonthsStartingSept))
+	copy(gregorianMonths, gregMonthsStartingSept)
 
 	newYearDay := startDayOfEc(ecDate.Year)
 	gregorianYear := ecDate.Year + 7
@@ -84,21 +84,22 @@ func ToGregorian(ecDate Date) Date {
 
 	return Date{
 		Day:   gregorianDate,
-		Month: GregOrder[m],
+		Month: gregOrder[m],
 		Year:  gregorianYear,
 	}
 }
 
+// ToEthiopian Converts given date in Gregorian calendar to Ethiopian calendar
 func ToEthiopian(gcDate Date) Date {
 	// dates between 5 and 14 of May 1582 are invalid
 	if gcDate.Month == 10 && gcDate.Day >= 5 && gcDate.Day <= 14 && gcDate.Year == 1582 {
 		return Date{}
 	}
 
-	gregorianMonths := make([]int, len(GregMonthsStartingJan))
-	copy(gregorianMonths, GregMonthsStartingJan)
-	ethMonths := make([]int, len(EthMonths))
-	copy(ethMonths, EthMonths)
+	gregorianMonths := make([]int, len(gregMonthsStartingJan))
+	copy(gregorianMonths, gregMonthsStartingJan)
+	ethiopianMonths := make([]int, len(ethMonths))
+	copy(ethiopianMonths, ethMonths)
 
 	if (gcDate.Year %4 == 0 && gcDate.Year % 100 != 0) || gcDate.Year % 400 == 0 {
 		gregorianMonths[6] = 29
@@ -106,7 +107,7 @@ func ToEthiopian(gcDate Date) Date {
 
 	ethYear := gcDate.Year - 8
 	if ethYear % 4 == 3 {
-		ethMonths[10] = 6
+		ethiopianMonths[10] = 6
 	}
 
 	// Ethiopian new year in Gregorian calendar
@@ -127,30 +128,30 @@ func ToEthiopian(gcDate Date) Date {
 
 	// take into account the 1582 change
 	if gcDate.Year < 1582 {
-		ethMonths[1] = 0
-		ethMonths[2] = tahisas
+		ethiopianMonths[1] = 0
+		ethiopianMonths[2] = tahisas
 	} else if until <= 277 && gcDate.Year == 1582 {
-		ethMonths[1] = 0
-		ethMonths[2] = tahisas
+		ethiopianMonths[1] = 0
+		ethiopianMonths[2] = tahisas
 	} else {
 		tahisas = newYearDay - 3
-		ethMonths[1] = tahisas
+		ethiopianMonths[1] = tahisas
 	}
 
 	// calculate month and date incrementally
 	m := 0
 	ethDate := 0
 
-	for i := 1; i < len(ethMonths); i++ {
+	for i := 1; i < len(ethiopianMonths); i++ {
 		m = i
-		if until <= ethMonths[m] {
+		if until <= ethiopianMonths[m] {
 			ethDate = until
-			if m == 1 || ethMonths[m] == 0 {
+			if m == 1 || ethiopianMonths[m] == 0 {
 				ethDate = until + 30 - tahisas
 			}
 			break
 		} else {
-			until -= ethMonths[m]
+			until -= ethiopianMonths[m]
 		}
 	}
 
@@ -161,7 +162,7 @@ func ToEthiopian(gcDate Date) Date {
 
 	return Date{
 		Day:   ethDate,
-		Month: EthOrder[m],
+		Month: ethOrder[m],
 		Year:  ethYear,
 	}
 }

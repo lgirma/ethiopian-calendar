@@ -43,5 +43,12 @@ func TestToEthiopian(t *testing.T) {
 	assert.Equal(t, 2014, ec.Year)
 	assert.Equal(t, 4, ec.Month)
 	assert.Equal(t, 1, ec.Day)
+
+	// Pagumen
+	ec = ToEthiopian(NewDate(2022, 9, 6))
+	assert.Equal(t, 2014, ec.Year)
+	assert.Equal(t, 13, ec.Month)
+	assert.Equal(t, 1, ec.Day)
+
 }
 

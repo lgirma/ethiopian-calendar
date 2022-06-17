@@ -19,6 +19,9 @@ func GetRabit(year int) int {
 func GetWenber(year int) int {
 	aa := 5500 + year
 	// TODO: What happens when (aa % 19 == 0)?
+	if aa % 19 == 0 {
+		return 18
+	}
 	return (aa % 19) - 1
 }
 

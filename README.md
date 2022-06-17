@@ -47,7 +47,7 @@ ethcal.GetFeast(ethcal.FEAST_TINSAE, 2013)
 
 The following feasts are available:
 
-```
+```javascript
 FEAST_ABIY_TSOM = 14            // Or can use FEAST_GREAT_LENT
 FEAST_DEBREZEIT = 41
 FEAST_HOSAENA = 62
@@ -64,13 +64,19 @@ FEAST_TSOME_HAWARIAT = 119      // Or can use FEAST_APOSTLES_FAST
 Utilities to convert date and month values to Amharic/Geez strings are also available.
 
 ```go
-// Using 0-based indexing
+// Indices starting from 1.
 
-ethcal.MONTH_NAMES[0]   // Returns "መስከረም"
+ethcal.MONTH_NAMES[1]
+ethcal.MONTH_NAMES[ethcal.MONTH_SEP]
+// Both return "መስከረም"
 
-ethcal.DAY_NAMES[2] // Returns "ረቡዕ"
+ethcal.DAY_NAMES[2]
+ethcal.DAY_NAMES[ethcal.DAY_WED]
+// Both return "ረቡዕ"
 
-ethcal.EVANGELISTS_NAMES[1] // Returns "ማርቆስ"
+ethcal.EVANGELISTS_NAMES[1]
+ethcal.EVANGELISTS_NAMES[etcal.EVANGELIST_MARK]
+// Both return "ማርቆስ"
 ```
 
 ## License

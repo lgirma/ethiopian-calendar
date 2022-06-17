@@ -1,18 +1,22 @@
 package ethiopian_calendar
 
+// DayOfYear Represents a date structure with Day and Month
 type DayOfYear struct {
 	Day int
 	Month int
 }
 
+// NewDay Creates a new DayOfYear structure
 func NewDay(month int, day int) DayOfYear {
 	return DayOfYear{Month: month, Day: day}
 }
 
+// NewDate Creates a new Date structure
 func NewDate(year int, month int, day int) Date {
 	return Date{Year: year, Month: month, Day: day}
 }
 
+// Date Represents a date structure with Day, Month and Year
 type Date struct {
 	Day int
 	Month int
@@ -37,6 +41,19 @@ const MONTH_SENE = 10
 const MONTH_HAMLE = 11
 const MONTH_NEHASE = 12
 const MONTH_PAGUMEN = 13
+
+const MONTH_SEP = 1
+const MONTH_OCT = 2
+const MONTH_NOV = 3
+const MONTH_DEC = 4
+const MONTH_JAN = 5
+const MONTH_FEB = 6
+const MONTH_MAR = 7
+const MONTH_APR = 8
+const MONTH_MAY = 9
+const MONTH_JUN = 10
+const MONTH_JUL = 11
+const MONTH_AUG = 12
 
 const DAY_MON = 1
 const DAY_TUE = 2
