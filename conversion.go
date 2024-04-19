@@ -102,7 +102,7 @@ func ToEthiopian(gcDate Date) Date {
 	copy(ethiopianMonths, ethMonths)
 
 	if (gcDate.Year %4 == 0 && gcDate.Year % 100 != 0) || gcDate.Year % 400 == 0 {
-		gregorianMonths[6] = 29
+		gregorianMonths[2] = 29
 	}
 
 	ethYear := gcDate.Year - 8

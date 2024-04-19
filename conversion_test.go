@@ -1,8 +1,9 @@
 package ethiopian_calendar
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestToGregorian(t *testing.T) {
@@ -52,3 +53,12 @@ func TestToEthiopian(t *testing.T) {
 
 }
 
+func TestToEthiopianWithGCLeapYear(t *testing.T) {
+
+	// Leap year in GC (Feb = 29 days)
+	ec := ToEthiopian(NewDate(2024, 4, 19))
+	assert.Equal(t, 2016, ec.Year)
+	assert.Equal(t, 8, ec.Month)
+	assert.Equal(t, 11, ec.Day)
+
+}
